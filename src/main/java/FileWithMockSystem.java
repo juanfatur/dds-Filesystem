@@ -1,11 +1,11 @@
-public class FileWindows implements File {
+public class FileWithMockSystem implements File {
 	Bloque bloqueAsync = new Bloque();
 	LowLevelFileSystem filesystem;
 	int fd;
 	
-	FileWindows(String path){
-		filesystem = new FileSystemWindows();
-		fd = filesystem.openFile(path);
+	FileWithMockSystem(String path){
+		filesystem = new MockFileSystem();
+		fd = filesystem.openFile(path); //El archivo se abre al crearse su instancia
 	}
 	
 	public Bloque syncRead(int bytesALeer) {
@@ -26,5 +26,6 @@ public class FileWindows implements File {
 		); 
 		return bloqueAsync;
 	}
+	
 
 }
