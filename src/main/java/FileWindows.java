@@ -15,5 +15,7 @@ public class FileWindows implements File {
 		bloqueLeido.setBytes(buffer,bytesLeidos);
 		return bloqueLeido;
 	}
+	
+	
 
 }
