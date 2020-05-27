@@ -1,5 +1,5 @@
-
 public class FileWindows implements File {
+	Bloque bloqueAsync = new Bloque();
 	LowLevelFileSystem filesystem;
 	int fd;
 	
@@ -16,6 +16,15 @@ public class FileWindows implements File {
 		return bloqueLeido;
 	}
 	
-	
+	public Bloque asyncRead(int bytesALeer) {
+		byte[] buffer = new byte[bytesALeer];
+		filesystem.asyncReadFile(fd, buffer, 0, bytesALeer-1,i -> {
+			Bloque bloqueLeido = this.bloqueAsync;
+			bloqueLeido.clear();
+			bloqueLeido.setBytes(buffer,i);
+		}
+		); 
+		return bloqueAsync;
+	}
 
 }
