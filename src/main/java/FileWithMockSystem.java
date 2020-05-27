@@ -20,7 +20,6 @@ public class FileWithMockSystem implements File {
 		byte[] buffer = new byte[bytesALeer];
 		filesystem.asyncReadFile(fd, buffer, 0, bytesALeer-1,i -> {
 			Bloque bloqueLeido = this.bloqueAsync;
-			bloqueLeido.clear();
 			bloqueLeido.setBytes(buffer,i);
 		}
 		); 

@@ -1,17 +1,22 @@
 import java.util.*;
 
 public class Bloque {
-	List<Byte> bytes = new ArrayList<>();
+	byte[] bytes;
+	
 	int tamanio() {
-		return bytes.size();
-	}
-	void setBytes(byte[] bytesLeidos,int tamanio) {
-		for(int i=0; i<tamanio;i++) {
-			bytes.add(bytesLeidos[i]);
-		}
+		return bytes.length;
 	}
 	
-	void clear() {
-		bytes.clear();
+	void setBytes(byte[] bytesLeidos,int tamanio) {
+		bytes = new byte[tamanio];
+		for (int i = 0; i < tamanio; i++) {
+	         bytes[i] = bytesLeidos[i];
+	      }
+	}
+	
+
+	
+	byte[] getBytes() {
+		return bytes;
 	}
 }
