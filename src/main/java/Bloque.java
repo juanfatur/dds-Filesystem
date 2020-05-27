@@ -10,4 +10,8 @@ public class Bloque {
 			bytes.add(bytesLeidos[i]);
 		}
 	}
+	
+	void clear() {
+		bytes.clear();
+	}
 }
