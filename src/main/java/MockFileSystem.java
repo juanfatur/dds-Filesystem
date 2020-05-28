@@ -3,7 +3,8 @@ import java.util.function.Consumer;
 public class MockFileSystem implements LowLevelFileSystem {
 	
 	int pointer=0;
-	byte[] writtenData;
+	int readPointer = 0;
+	byte[] writtenData = new byte[100];
 
 	@Override
 	public int openFile(String path) {
@@ -21,16 +22,21 @@ public class MockFileSystem implements LowLevelFileSystem {
 	public int syncReadFile(int fd, byte[] bufferBytes, int bufferStart, int bufferEnd) {
 		int cantidadLeida = 0;
 		for(int i = bufferStart;i<=bufferEnd; i++) {
+			System.out.println("Leyendo posicion " + readPointer + " del archivo");
 			cantidadLeida++;
-			bufferBytes[i] = (byte) pointer++;
+			bufferBytes[i] = writtenData[readPointer];
+			readPointer++;
 		}
 		return cantidadLeida;
 	}
 
 	@Override
 	public void syncWriteFile(int fd, byte[] bufferBytes, int bufferStart, int bufferEnd) {
-		for(int i=bufferStart;i<=bufferEnd;i++,pointer++) {
+		System.out.println("Llamado syncWriteFile. A escribir desde " + bufferStart + " hasta " + bufferEnd);
+		for(int i=bufferStart;i<=bufferEnd;i++) {
+			System.out.println("Escribiendo posicion " + pointer + " del archivo");
 			writtenData[pointer] = bufferBytes[i];
+			pointer++;
 		}
 	}
 
