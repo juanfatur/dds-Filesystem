@@ -71,22 +71,25 @@ public class FileTests {
 		byte[] bytesEsperados = {0x10,0x0,0x2,0x0};
 		Assert.assertArrayEquals(bytesEsperados, listaParticiones.get(2).getBytes());
 	}
-	
-//	@Test
-//	public void leerArchivoEnteroYEscribirEnOtro() {
-//		File origen = new FileWithMockSystem("Origen path");
-//		Bloque contenidoOrigen = new Bloque();
-//		byte[] secuenciaContenido = {0x0,0x1,0x2,0x3,0x4,0x5,0x6,0x7,0x8,0x9,0x10,0x0,0x2,0x0,0x1,0x4};
-//		contenidoOrigen.setBytes(secuenciaContenido, secuenciaContenido.length);
-//		origen.syncWrite(contenidoOrigen);
-//		
-//		File destino = new FileWithMockSystem("Destino path");
-//		
-//		contenidoOrigen = origen.syncRead(secuenciaContenido.length);
-//		
-//		
-//
-//		
-//	}
+
+	@Test
+	public void leerArchivoEnteroYEscribirEnOtro() {
+		File origen = new FileWithMockSystem("Origen path");
+		Bloque contenidoOrigen = new Bloque();
+		byte[] secuenciaContenido = {0x0,0x1,0x2,0x3,0x4,0x5,0x6,0x7,0x8,0x9,0x10,0x0,0x2,0x0,0x1,0x4};
+		contenidoOrigen.setBytes(secuenciaContenido, secuenciaContenido.length);
+		origen.syncWrite(contenidoOrigen);
+		
+		File destino = new FileWithMockSystem("Destino path");
+		
+		contenidoOrigen = origen.syncRead(secuenciaContenido.length);
+		List<Bloque> listaBloques = contenidoOrigen.dividirEnBloques(5);
+		destino.syncWrite(listaBloques);
+		
+		Assert.assertArrayEquals(secuenciaContenido, destino.syncRead(secuenciaContenido.length).getBytes());
+		
+
+		
+	}
 	
 }
