@@ -15,11 +15,6 @@ public class FileTests {
 		file.syncWrite(bloqueDefault);
 	}
 	
-	@Test
-	public void setupWorks() {
-		byte[] bytesRetrieved = bloqueDefault.getBytes();
-		Assert.assertEquals(11,bloqueDefault.tamanio());
-	}
 	
 	@Test
 	public void syncReadFileBloquec0() {
