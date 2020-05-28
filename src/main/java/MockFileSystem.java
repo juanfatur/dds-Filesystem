@@ -42,11 +42,12 @@ public class MockFileSystem implements LowLevelFileSystem {
 
 	@Override
 	public void asyncReadFile(int fd, byte[] bufferBytes, int bufferStart, int bufferEnd, Consumer<Integer> callback) {
-		byte byteAEscribirEnBuffer = 0;
 		int cantidadLeida = 0;
 		for(int i = bufferStart;i<=bufferEnd; i++) {
+			System.out.println("Leyendo posicion " + readPointer + " del archivo");
 			cantidadLeida++;
-			bufferBytes[i] = byteAEscribirEnBuffer++;
+			bufferBytes[i] = writtenData[readPointer];
+			readPointer++;
 		}
 		callback.accept(cantidadLeida);
 
