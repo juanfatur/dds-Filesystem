@@ -26,6 +26,10 @@ public class FileWithMockSystem implements File {
 		return bloqueAsync;
 	}
 	
+	public void syncWrite(Bloque bloque) {
+		filesystem.syncWriteFile(fd, bloque.getBytes(), 0, bloque.tamanio());
+	}
+	
 	public void close() {
 		filesystem.closeFile(fd);
 	}
