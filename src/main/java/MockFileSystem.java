@@ -1,6 +1,8 @@
 import java.util.function.Consumer;
 
 public class MockFileSystem implements LowLevelFileSystem {
+	
+	int pointer=0;
 
 	@Override
 	public int openFile(String path) {
@@ -16,11 +18,10 @@ public class MockFileSystem implements LowLevelFileSystem {
 
 	@Override
 	public int syncReadFile(int fd, byte[] bufferBytes, int bufferStart, int bufferEnd) {
-		byte byteAEscribirEnBuffer = 0;
 		int cantidadLeida = 0;
 		for(int i = bufferStart;i<=bufferEnd; i++) {
 			cantidadLeida++;
-			bufferBytes[i] = byteAEscribirEnBuffer++;
+			bufferBytes[i] = (byte) pointer++;
 		}
 		return cantidadLeida;
 	}
