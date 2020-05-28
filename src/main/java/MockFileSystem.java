@@ -3,6 +3,7 @@ import java.util.function.Consumer;
 public class MockFileSystem implements LowLevelFileSystem {
 	
 	int pointer=0;
+	byte[] writtenData;
 
 	@Override
 	public int openFile(String path) {
@@ -28,8 +29,9 @@ public class MockFileSystem implements LowLevelFileSystem {
 
 	@Override
 	public void syncWriteFile(int fd, byte[] bufferBytes, int bufferStart, int bufferEnd) {
-		
-
+		for(int i=bufferStart;i<=bufferEnd;i++,pointer++) {
+			writtenData[pointer] = bufferBytes[i];
+		}
 	}
 
 	@Override
