@@ -13,9 +13,7 @@ public class Bloque {
 	         bytes[i] = bytesLeidos[i];
 	      }
 	}
-	
 
-	
 	byte[] getBytes() {
 		return bytes;
 	}

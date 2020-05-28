@@ -26,5 +26,9 @@ public class FileWithMockSystem implements File {
 		return bloqueAsync;
 	}
 	
+	public void close() {
+		filesystem.closeFile(fd);
+	}
+	
 
 }
