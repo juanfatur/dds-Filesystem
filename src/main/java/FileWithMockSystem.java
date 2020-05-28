@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class FileWithMockSystem implements File {
 	Bloque bloqueAsync = new Bloque();
 	LowLevelFileSystem filesystem;
@@ -30,6 +32,12 @@ public class FileWithMockSystem implements File {
 	
 	public void syncWrite(Bloque bloque) {
 		filesystem.syncWriteFile(fd, bloque.getBytes(), 0, bloque.tamanio()-1);
+	}
+	
+	public void syncWrite(List<Bloque> lista) {
+		for(Bloque bloque:lista) {
+			this.syncWrite(bloque);
+		}
 	}
 	
 	public void close() {
